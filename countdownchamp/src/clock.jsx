@@ -37,6 +37,21 @@ class Clock extends Component{
         this.getTimeUntil(this.props.deadline)
     }
 
+    componentDidMount(){
+        setInterval(() => this.getTimeUntil(this.props.deadline), 1000);
+    }
+
+    leading0(num){
+    
+        if (num < 10){
+            return "0" + num;
+        }
+        else{
+            return num;
+        }
+
+    }
+
     getTimeUntil(deadline){
         // For variables that don't need updating, we use "const", and for those who need updating we use "let"
         const time = Date.parse(deadline) - Date.parse(new Date());
@@ -56,10 +71,10 @@ class Clock extends Component{
     render(){
         return(
             <div>
-                <div className="clock-days">{this.state.day} days </div>
-                <div className="clock-hours"> {this.state.hour} hours </div>
-                <div className="clock-minutes"> {this.state.minute}  minutes </div>
-                <div className="clock-seconds"> {this.state.second}  seconds </div>
+                <div className="clock-days">{this.leading0(this.state.day)} days </div>
+                <div className="clock-hours"> {this.leading0(this.state.hour)} hours </div>
+                <div className="clock-minutes"> {this.leading0(this.state.minute)}  minutes </div>
+                <div className="clock-seconds"> {this.leading0(this.state.second)}  seconds </div>
             </div>
         );
     }
